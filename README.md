@@ -37,6 +37,9 @@ This project introduces a "Fingerprint Vehicle Starter with Drug Sensing" system
 ## Patent Information
 Patent filed in 2024 for "Fingerprint Vehicle Starter with Drug Sensing System".
 
+## Full Project Report
+The detailed project report including team members, staff, and college logo can be downloaded here: [Report](Fingerprint_Vehicle_Starter_Report.docx)
+
 ## Future Enhancements
 - GPS tracking integration
 - Mobile app-based authentication
