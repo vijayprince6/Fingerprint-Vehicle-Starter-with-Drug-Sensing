@@ -7,32 +7,33 @@
 // -----------------------
 #define RELAY_PIN 7        // Relay to control ignition
 #define BUTTON_PIN 2       // Optional start button
+#define MQ3_PIN A0         // MQ-3 Alcohol Sensor
+
+// -----------------------
+// Thresholds
+// -----------------------
+#define ALCOHOL_THRESHOLD 200  // Adjust based on calibration
 
 // -----------------------
 // LCD Setup
 // -----------------------
-LiquidCrystal_I2C lcd(0x27, 16, 2);
-
-// -----------------------
-// MQ3 Alcohol Sensor Pin
-// -----------------------
-#define MQ3_PIN A0
-#define ALCOHOL_THRESHOLD 200  // Adjust based on calibration
+LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address 0x27, 16x2 LCD
 
 // -----------------------
 // Fingerprint Sensor Setup
 // -----------------------
 SoftwareSerial mySerial(10, 11); // RX, TX pins for R307
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
+Adafruit_Fingerprint finger(&mySerial);
 
 // -----------------------
 // Setup
 // -----------------------
 void setup() {
   pinMode(RELAY_PIN, OUTPUT);
-  pinMode(BUTTON_PIN, INPUT_PULLUP);
-  digitalWrite(RELAY_PIN, LOW); // Ensure ignition is OFF
+  pinMode(BUTTON_PIN, INPUT_PULLUP); // Optional button
+  digitalWrite(RELAY_PIN, LOW);      // Ensure ignition is OFF
 
+  // Initialize LCD
   lcd.init();
   lcd.backlight();
   lcd.setCursor(0, 0);
@@ -47,10 +48,10 @@ void setup() {
     lcd.setCursor(0, 1);
     lcd.print("Sensor Ready");
   } else {
-    Serial.println("Fingerprint sensor not found");
+    Serial.println("Fingerprint sensor not found!");
     lcd.setCursor(0, 1);
     lcd.print("Sensor Error");
-    while (1); // Halt
+    while (1); // Halt if sensor not found
   }
 }
 
@@ -62,15 +63,16 @@ void loop() {
   lcd.setCursor(0, 0);
   lcd.print("Place Finger");
 
+  // Read alcohol sensor
   int alcoholValue = analogRead(MQ3_PIN);
   Serial.print("Alcohol Sensor: ");
   Serial.println(alcoholValue);
 
-  // Check for alcohol first
+  // Prevent start if alcohol detected
   if (alcoholValue > ALCOHOL_THRESHOLD) {
     lcd.setCursor(0, 1);
     lcd.print("Alcohol Detected");
-    digitalWrite(RELAY_PIN, LOW); // Prevent ignition
+    digitalWrite(RELAY_PIN, LOW); // Keep ignition OFF
     delay(3000);
     return;
   }
@@ -84,12 +86,14 @@ void loop() {
 
   p = finger.fingerFastSearch();
   if (p == FINGERPRINT_OK) {
-    Serial.print("Authorized ID: "); Serial.println(finger.fingerID);
+    Serial.print("Authorized ID: "); 
+    Serial.println(finger.fingerID);
+
     lcd.setCursor(0, 1);
     lcd.print("Authorized! Start");
     digitalWrite(RELAY_PIN, HIGH); // Turn on ignition
-    delay(5000); // Keep ignition ON for demonstration
-    digitalWrite(RELAY_PIN, LOW);
+    delay(5000); // Keep ignition ON for demo
+    digitalWrite(RELAY_PIN, LOW);  // Turn off after 5 sec
   } else {
     lcd.setCursor(0, 1);
     lcd.print("Access Denied");
@@ -98,4 +102,3 @@ void loop() {
     delay(2000);
   }
 }
-
