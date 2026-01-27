@@ -7,7 +7,7 @@ A fingerprint-based vehicle ignition system integrated with alcohol/drug detecti
 
 ## 📄 Project Report
 You can download the project report here:  
-[Fingerprint Vehicle Starter Report (Word)](Fingerprint_Vehicle_Starter_Report.docx)
+[Fingerprint Vehicle Starter Report (Word)](Fingerprint_Vehicle_Starter_Report.pdf)
 
 ---
 
