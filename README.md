@@ -1,20 +1,24 @@
-# Fingerprint Vehicle Starter with Drug/Alcohol Sensing
+# Fingerprint-Based Vehicle Ignition with Alcohol Detection
 
-**About:**  
-A fingerprint-based vehicle ignition system integrated with alcohol/drug detection to ensure only authorized users can start the vehicle safely.
+## About  
+A fingerprint-based vehicle ignition system integrated with alcohol detection to ensure only authorized users can start the vehicle safely.
 
 ---
 
-## 📄 Project Report
+## 📄 Project Report  
 You can download the project report here:  
-[Fingerprint Vehicle Starter Report (Word)](Fingerprint_Vehicle_Starter_Report.pdf)
+[Fingerprint Vehicle Starter Report (PDF)](Fingerprint_Vehicle_Starter_Report.pdf)
 
 ---
 
-## 🖼 Block Diagram
-Here’s the block diagram of the system:
-
+## 🖼 Block Diagram  
+Here’s the block diagram of the system:  
 ![Block Diagram](BlockDiagram.png)
+
+---
+
+## 📸 Hardware Prototype  
+![Hardware Prototype](prototype.jpeg)
 
 ---
 
@@ -38,7 +42,7 @@ Here’s the block diagram of the system:
 
 ## ⚙️ Working Principle
 1. The system is powered using a 9V supply.  
-2. The MQ-3 alcohol sensor checks for alcohol/drug presence.  
+2. The MQ-3 alcohol sensor checks for alcohol presence.  
 3. The R307 fingerprint sensor verifies authorized users.  
 4. If the user is authorized and no alcohol is detected:  
    - The relay is activated to start the vehicle.  
@@ -56,5 +60,9 @@ Here’s the block diagram of the system:
 
 ---
 
-## 📜 License
+## 📜 License  
 This project is licensed under the MIT License. ✅
+
+---
+
+⚠️ **Note:** This project is intended for academic and prototype purposes only.
